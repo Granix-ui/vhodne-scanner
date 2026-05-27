@@ -6,23 +6,23 @@ from urllib.parse import urljoin
 
 st.title("Vhodné uveřejnění – aktivní zakázky (okolí Vřesové)")
 
+# Seznam seřazený podle vzdálenosti od Vřesové (356 01)
 urls_text = st.text_area(
     "Zadej URL profilů zadavatelů (jedna na řádek)",
-    height=400,
-    value="https://www.vhodne-uverejneni.cz/profil/thermal-f-a-s\n"
+    height=420,
+    value="https://www.vhodne-uverejneni.cz/profil/obec-vresova\n"
+          "https://www.vhodne-uverejneni.cz/profil/00259349\n"          # Těšovice
+          "https://www.vhodne-uverejneni.cz/profil/00254592\n"          # blízký zadavatel
+          "https://www.vhodne-uverejneni.cz/profil/00255050\n"
+          "https://www.vhodne-uverejneni.cz/profil/thermal-f-a-s\n"     # Sokolov
           "https://www.vhodne-uverejneni.cz/profil/00254819\n"
           "https://www.vhodne-uverejneni.cz/profil/00573183?tabs[xenorganization_detail_orders]=1\n"
-          "https://www.vhodne-uverejneni.cz/profil/obec-vresova\n"
-          "https://www.vhodne-uverejneni.cz/profil/00259349\n"
           "https://www.vhodne-uverejneni.cz/profil/obec-lomnice?tabs[xenorganization_detail_orders]=1\n"
           "https://www.vhodne-uverejneni.cz/profil/00253936\n"
-          "https://www.vhodne-uverejneni.cz/profil/00254592\n"
-          "https://www.vhodne-uverejneni.cz/profil/00255050\n"
           "https://www.vhodne-uverejneni.cz/profil/witte-nejdek-spol-s-r-o\n"
           "https://www.vhodne-uverejneni.cz/profil/00255076\n"
           "https://www.vhodne-uverejneni.cz/profil/47700521\n"
           "https://www.vhodne-uverejneni.cz/profil/obec-tesovice-1\n"
-          "https://www.vhodne-uverejneni.cz/profil/00261939\n"
           "https://www.vhodne-uverejneni.cz/profil/26319438\n"
           "https://www.vhodne-uverejneni.cz/profil/obec-lipova\n"
           "https://www.vhodne-uverejneni.cz/profil/obec-straz-nad-ohri\n"
@@ -42,7 +42,7 @@ if st.button("Načíst čerstvá data"):
 
     now = datetime.now()
 
-    with st.spinner("Načítám aktivní zakázky z Aktuálního uveřejnění..."):
+    with st.spinner("Načítám aktivní zakázky..."):
         for base_url in urls:
             try:
                 url = base_url
