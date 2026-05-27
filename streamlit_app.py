@@ -1,14 +1,14 @@
 import streamlit as st
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime, timedelta
+from datetime import datetime
 from urllib.parse import urljoin
 
-st.title("Vhodné uveřejnění – aktivní zakázky")
+st.title("Vhodné uveřejnění – aktivní zakázky (okolí Vřesové)")
 
 urls_text = st.text_area(
     "Zadej URL profilů zadavatelů (jedna na řádek)",
-    height=320,
+    height=400,
     value="https://www.vhodne-uverejneni.cz/profil/thermal-f-a-s\n"
           "https://www.vhodne-uverejneni.cz/profil/00254819\n"
           "https://www.vhodne-uverejneni.cz/profil/00573183?tabs[xenorganization_detail_orders]=1\n"
@@ -20,7 +20,18 @@ urls_text = st.text_area(
           "https://www.vhodne-uverejneni.cz/profil/00255050\n"
           "https://www.vhodne-uverejneni.cz/profil/witte-nejdek-spol-s-r-o\n"
           "https://www.vhodne-uverejneni.cz/profil/00255076\n"
-          "https://www.vhodne-uverejneni.cz/profil/47700521"
+          "https://www.vhodne-uverejneni.cz/profil/47700521\n"
+          "https://www.vhodne-uverejneni.cz/profil/obec-tesovice-1\n"
+          "https://www.vhodne-uverejneni.cz/profil/00261939\n"
+          "https://www.vhodne-uverejneni.cz/profil/26319438\n"
+          "https://www.vhodne-uverejneni.cz/profil/obec-lipova\n"
+          "https://www.vhodne-uverejneni.cz/profil/obec-straz-nad-ohri\n"
+          "https://www.vhodne-uverejneni.cz/profil/00259250\n"
+          "https://www.vhodne-uverejneni.cz/profil/obec-cernava\n"
+          "https://www.vhodne-uverejneni.cz/profil/mesto-loket\n"
+          "https://www.vhodne-uverejneni.cz/profil/mesto-plesna\n"
+          "https://www.vhodne-uverejneni.cz/profil/00254231\n"
+          "https://www.vhodne-uverejneni.cz/profil/vodarna-sokolovsko-s-r-o"
 )
 
 if st.button("Načíst čerstvá data"):
@@ -34,7 +45,6 @@ if st.button("Načíst čerstvá data"):
     with st.spinner("Načítám aktivní zakázky z Aktuálního uveřejnění..."):
         for base_url in urls:
             try:
-                # Přechod na záložku Aktuální uveřejnění
                 url = base_url
                 if "tabs[xenorganization_detail_orders]" not in url:
                     separator = "?" if "?" not in url else "&"
@@ -50,7 +60,6 @@ if st.button("Načíst čerstvá data"):
 
                 active_links = []
 
-                # Hledání v tabulce
                 for row in soup.find_all("tr"):
                     cols = row.find_all("td")
                     if len(cols) < 3:
@@ -63,17 +72,15 @@ if st.button("Načíst čerstvá data"):
                     name = name_tag.text.strip()
                     link = urljoin(url, name_tag["href"])
 
-                    # Lhůta pro nabídky (3. sloupec)
-                    deadline_text = cols[2].text.strip()
+                    deadline_text = cols[2].text.strip() if len(cols) > 2 else ""
 
                     if not deadline_text or "nezveřejněna" in deadline_text.lower():
                         continue
 
                     try:
-                        # Podpora "Dnes 15:00:00"
                         if deadline_text.lower().startswith("dnes"):
-                            time_str = deadline_text.split()[-1]
-                            deadline = now.replace(hour=int(time_str[:2]), minute=int(time_str[3:5]), second=0)
+                            time_part = deadline_text.split()[-1]
+                            deadline = now.replace(hour=int(time_part[:2]), minute=int(time_part[3:5]), second=0)
                         else:
                             deadline = datetime.strptime(deadline_text, "%d.%m.%Y")
                         
