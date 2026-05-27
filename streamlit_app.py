@@ -32,7 +32,7 @@ urls_text = st.text_area(
           "https://www.vhodne-uverejneni.cz/profil/00254231\n"
           "https://www.vhodne-uverejneni.cz/profil/vodarna-sokolovsko-s-r-o\n"
           "https://www.vhodne-uverejneni.cz/profil/obec-straz-nad-ohri\n"
-          "# Vzdálenější (cca 30–50 km)\n"
+          "# Vzdálenější (30–50 km)\n"
           "https://www.vhodne-uverejneni.cz/profil/mesto-nova-role\n"
           "https://www.vhodne-uverejneni.cz/profil/mesto-hroznetin\n"
           "https://www.vhodne-uverejneni.cz/profil/mesto-tepla"
