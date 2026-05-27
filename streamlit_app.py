@@ -9,7 +9,7 @@ st.title("Vhodné uveřejnění – aktivní zakázky (okolí Vřesové)")
 # Seznam seřazený podle vzdálenosti od Vřesové (356 01)
 urls_text = st.text_area(
     "Zadej URL profilů zadavatelů (jedna na řádek) - seřazeno od nejbližších",
-    height=450,
+    height=480,
     value="https://www.vhodne-uverejneni.cz/profil/obec-vresova\n"
           "https://www.vhodne-uverejneni.cz/profil/00259349\n"          # Těšovice
           "https://www.vhodne-uverejneni.cz/profil/00254592\n"
@@ -32,7 +32,8 @@ urls_text = st.text_area(
           "https://www.vhodne-uverejneni.cz/profil/00254231\n"
           "https://www.vhodne-uverejneni.cz/profil/vodarna-sokolovsko-s-r-o\n"
           "https://www.vhodne-uverejneni.cz/profil/obec-straz-nad-ohri\n"
-          "# Vzdálenější (cca 30-50 km)\n"
+          "# Vzdálenější (cca 30–50 km)\n"
+          "https://www.vhodne-uverejneni.cz/profil/mesto-nova-role\n"
           "https://www.vhodne-uverejneni.cz/profil/mesto-hroznetin\n"
           "https://www.vhodne-uverejneni.cz/profil/mesto-tepla"
 )
